@@ -1,94 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!doctype html>
+<html lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.2">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カタカナれんしゅう</title>
+<style>
+body{margin:0;font-family:-apple-system,system-ui,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#0b0f14;color:#e8eef7}
+.wrap{max-width:900px;margin:0 auto;padding:20px}
+.card{background:#121826;border:1px solid #243044;border-radius:18px;padding:18px}
+h1{font-size:22px;margin:0 0 12px}
+.sub{opacity:.85;margin:0 0 16px;font-size:14px;line-height:1.5}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 16px}
+button{border:0;border-radius:16px;padding:14px 18px;font-size:18px;font-weight:700;color:#0b0f14;background:#8ee6ff;min-height:52px}
+button.secondary{background:#c6ffb6}
+.list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.item{background:#0f1522;border:1px solid #223048;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.hira{font-size:26px;font-weight:800;letter-spacing:.06em}
+.ans{font-size:22px;font-weight:800;letter-spacing:.06em;opacity:0;transform:translateY(2px);transition:.15s;color:#c6ffb6;white-space:nowrap}
+.show .ans{opacity:1;transform:translateY(0)}
+</style>
 </head>
 <body>
-<p class="p1">&lt;!doctype html&gt;</p>
-<p class="p1">&lt;html lang="ja"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;meta charset="utf-8"&gt;</p>
-<p class="p1">&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</p>
-<p class="p1">&lt;title&gt;カタカナれんしゅう&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">body{margin:0;font-family:-apple-system,system-ui,"Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;background:#0b0f14;color:#e8eef7}</p>
-<p class="p1">.wrap{max-width:900px;margin:0 auto;padding:20px}</p>
-<p class="p1">.card{background:#121826;border:1px solid #243044;border-radius:18px;padding:18px}</p>
-<p class="p1">h1{font-size:22px;margin:0 0 12px}</p>
-<p class="p1">.sub{opacity:.85;margin:0 0 16px;font-size:14px;line-height:1.5}</p>
-<p class="p1">.btns{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 16px}</p>
-<p class="p1">button{border:0;border-radius:16px;padding:14px 18px;font-size:18px;font-weight:700;color:#0b0f14;background:#8ee6ff;min-height:52px}</p>
-<p class="p1">button.secondary{background:#c6ffb6}</p>
-<p class="p1">.list{display:grid;gap:10px;margin:0;padding:0;list-style:none}</p>
-<p class="p1">.item{background:#0f1522;border:1px solid #223048;border-radius:16px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}</p>
-<p class="p1">.hira{font-size:26px;font-weight:800;letter-spacing:.06em}</p>
-<p class="p1">.ans{font-size:22px;font-weight:800;letter-spacing:.06em;opacity:0;transform:translateY(2px);transition:.15s;color:#c6ffb6;white-space:nowrap}</p>
-<p class="p1">.show .ans{opacity:1;transform:translateY(0)}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1">&lt;div class="wrap"&gt;&lt;div class="card"&gt;</p>
-<p class="p1">&lt;h1&gt;カタカナれんしゅう（ひらがな→カタカナ）&lt;/h1&gt;</p>
-<p class="p1">&lt;p class="sub"&gt;「5こ だす」→ 書く →「こたえ」でチェック&lt;/p&gt;</p>
-<p class="p1">&lt;div class="btns"&gt;</p>
-<p class="p1">&lt;button id="gen"&gt;5こ だす&lt;/button&gt;</p>
-<p class="p1">&lt;button id="toggle" class="secondary"&gt;こたえ：みない&lt;/button&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p1">&lt;ul id="list" class="list"&gt;&lt;/ul&gt;</p>
-<p class="p1">&lt;/div&gt;&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">(function(){</p>
-<p class="p1">function hiraToKata(s){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>var out=""; for(var i=0;i&lt;s.length;i++){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var c=s.charCodeAt(i);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>out += (c&gt;=0x3041 &amp;&amp; c&lt;=0x3096) ? String.fromCharCode(c+0x60) : s.charAt(i);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>} return out;</p>
-<p class="p1">}</p>
-<p class="p1">var WORDS=["いぬ","ねこ","さかな","とり","うさぎ","ぞう","きつね","たぬき","くま",</p>
-<p class="p1">"りんご","みかん","ぶどう","いちご","すいか","もも","なし","ばなな",</p>
-<p class="p1">"やさい","にんじん","たまねぎ","じゃがいも","きゅうり","とまと",</p>
-<p class="p1">"たまご","ぱん","ごはん","みそしる","おにぎり","おちゃ","みず","ぎゅうにゅう",</p>
-<p class="p1">"くるま","でんしゃ","ひこうき","ふね","じてんしゃ","ばす","しんごう","みち",</p>
-<p class="p1">"いえ","へや","まど","どあ","いす","つくえ","ほん","えんぴつ","けしごむ","かばん",</p>
-<p class="p1">"がっこう","きょうしつ","せんせい","ともだち","えんそく","こうえん",</p>
-<p class="p1">"あさ","ひる","よる","きのう","きょう","あした",</p>
-<p class="p1">"はる","なつ","あき","ふゆ","あめ","ゆき","かぜ","たいよう","ほし","つき",</p>
-<p class="p1">"あたま","かお","め","はな","みみ","くち","て","あし"];</p>
-<p class="p1">var show=false, cur=[];</p>
-<p class="p1">var list=document.getElementById("list");</p>
-<p class="p1">function pick5(){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>var picked=[], used={};</p>
-<p class="p1"><span class="Apple-converted-space">  </span>while(picked.length&lt;5){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var w=WORDS[Math.floor(Math.random()*WORDS.length)];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>if(!used[w]){ used[w]=1; picked.push(w); }</p>
-<p class="p1"><span class="Apple-converted-space">  </span>} return picked;</p>
-<p class="p1">}</p>
-<p class="p1">function render(){</p>
-<p class="p1"><span class="Apple-converted-space">  </span>list.innerHTML="";</p>
-<p class="p1"><span class="Apple-converted-space">  </span>for(var i=0;i&lt;cur.length;i++){</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var li=document.createElement("li");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>li.className="item"+(show?" show":"");</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var a=document.createElement("div"); a.className="hira"; a.textContent=(i+1)+". "+cur[i];</p>
-<p class="p1"><span class="Apple-converted-space">    </span>var b=document.createElement("div"); b.className="ans"; b.textContent=hiraToKata(cur[i]);</p>
-<p class="p1"><span class="Apple-converted-space">    </span>li.appendChild(a); li.appendChild(b); list.appendChild(li);</p>
-<p class="p1"><span class="Apple-converted-space">  </span>}</p>
-<p class="p1"><span class="Apple-converted-space">  </span>document.getElementById("toggle").textContent = show ? "こたえ：みる" : "こたえ：みない";</p>
-<p class="p1">}</p>
-<p class="p1">document.getElementById("gen").onclick=function(){ cur=pick5(); render(); };</p>
-<p class="p1">document.getElementById("toggle").onclick=function(){ show=!show; render(); };</p>
-<p class="p1">cur=pick5(); render();</p>
-<p class="p1">})();</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<div class="wrap"><div class="card">
+<h1>カタカナれんしゅう（ひらがな→カタカナ）</h1>
+<p class="sub">「5こ だす」→ 書く →「こたえ」でチェック</p>
+<div class="btns">
+<button id="gen">5こ だす</button>
+<button id="toggle" class="secondary">こたえ：みない</button>
+</div>
+<ul id="list" class="list"></ul>
+</div></div>
+
+<script>
+(function(){
+function hiraToKata(s){
+  var out=""; for(var i=0;i<s.length;i++){
+    var c=s.charCodeAt(i);
+    out += (c>=0x3041 && c<=0x3096) ? String.fromCharCode(c+0x60) : s.charAt(i);
+  } return out;
+}
+var WORDS=["いぬ","ねこ","さかな","とり","うさぎ","ぞう","きつね","たぬき","くま",
+"りんご","みかん","ぶどう","いちご","すいか","もも","なし","ばなな",
+"やさい","にんじん","たまねぎ","じゃがいも","きゅうり","とまと",
+"たまご","ぱん","ごはん","みそしる","おにぎり","おちゃ","みず","ぎゅうにゅう",
+"くるま","でんしゃ","ひこうき","ふね","じてんしゃ","ばす","しんごう","みち",
+"いえ","へや","まど","どあ","いす","つくえ","ほん","えんぴつ","けしごむ","かばん",
+"がっこう","きょうしつ","せんせい","ともだち","えんそく","こうえん",
+"あさ","ひる","よる","きのう","きょう","あした",
+"はる","なつ","あき","ふゆ","あめ","ゆき","かぜ","たいよう","ほし","つき",
+"あたま","かお","め","はな","みみ","くち","て","あし"];
+var show=false, cur=[];
+var list=document.getElementById("list");
+function pick5(){
+  var picked=[], used={};
+  while(picked.length<5){
+    var w=WORDS[Math.floor(Math.random()*WORDS.length)];
+    if(!used[w]){ used[w]=1; picked.push(w); }
+  } return picked;
+}
+function render(){
+  list.innerHTML="";
+  for(var i=0;i<cur.length;i++){
+    var li=document.createElement("li");
+    li.className="item"+(show?" show":"");
+    var a=document.createElement("div"); a.className="hira"; a.textContent=(i+1)+". "+cur[i];
+    var b=document.createElement("div"); b.className="ans"; b.textContent=hiraToKata(cur[i]);
+    li.appendChild(a); li.appendChild(b); list.appendChild(li);
+  }
+  document.getElementById("toggle").textContent = show ? "こたえ：みる" : "こたえ：みない";
+}
+document.getElementById("gen").onclick=function(){ cur=pick5(); render(); };
+document.getElementById("toggle").onclick=function(){ show=!show; render(); };
+cur=pick5(); render();
+})();
+</script>
 </body>
 </html>
